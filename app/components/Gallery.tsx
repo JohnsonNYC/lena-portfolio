@@ -6,11 +6,11 @@ const SEED = [1,2,3,4,5,6,7,8,9,10];
 const Gallery = () => {
   return ( <Container>
     <LeftContainer>
-      {SEED.map(() => <div style={{width:'90%', minHeight: '200px', border:'1px solid red'}}/>)}
+      {SEED.map((num, i) => <div key={`left-${i}`}style={{width:'90%', minHeight: '200px', border:'1px solid red'}}/>)}
     </LeftContainer>
 
     <RightContainer>
-      {SEED.map(() => <div style={{width:'100%', minHeight: '200px', border:'1px solid red'}}/>)}
+      {SEED.map((num, i) => <div key={`right-${i}`} style={{width:'100%', minHeight: '200px', border:'1px solid red'}}/>)}
     </RightContainer>
   </Container> );
 }

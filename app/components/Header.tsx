@@ -56,6 +56,7 @@ const NavContainer = styled(motion.nav)`
   position: fixed;
   top: 0;
   z-index: 999;
+  background: white; 
 
   & > div:first-of-type{
     height: 3rem;

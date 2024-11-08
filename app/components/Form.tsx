@@ -24,7 +24,7 @@ const Form = () => {
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setEmail(value);
 
     // if (!emailRegex.test(value)) {

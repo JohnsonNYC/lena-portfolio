@@ -6,7 +6,7 @@ const placeholder = "Lorem Ipsum is simply dummy text of the printing and types
 
 const AboutMe = () => {
   return (
-    <Container>
+    <Container id='about-me'>
       <div style={{height: '50%', position: 'relative', display: 'flex', justifyContent:'center', alignItems:'center'}}>
         <div style={{background:'black', width: '40%', height: '50%', position: 'relative', left: '10px'}}></div>
         <div style={{background: 'grey', width: '40%', height: '60%'}}></div>

@@ -7,20 +7,31 @@ import Text from './Text';
 const Header = () => {
   const prevScrollPosRef = useRef(0);
 
-  const [isDropdownOpen, setisDropdownOpen] = useState<boolean>(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [showHeader, setShowHeader] = useState<boolean>(true);
 
   const handleBurgerClick = ():void => {
-    setisDropdownOpen(!isDropdownOpen)
+    setIsDropdownOpen(!isDropdownOpen)
   }
 
   const handleScroll = ():void => {
     const currentScrollPosition = window.scrollY;
     const isScrollingUp = prevScrollPosRef.current > currentScrollPosition;
 
+    if(isScrollingUp)setIsDropdownOpen(false);
+
     setShowHeader(isScrollingUp || currentScrollPosition <= 0);
     prevScrollPosRef.current = currentScrollPosition;
 
+  }
+
+  const scrollToSection = (sectionId: string):void=> {
+    const sectionElement = document.getElementById(sectionId);
+    if (sectionElement) {
+      sectionElement.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
   }
 
   useEffect(() => {
@@ -38,11 +49,11 @@ const Header = () => {
         <Menu className='mobile-burger' onClick={handleBurgerClick}/>
       </div>
       <DropdownContainer initial={{height: 0}} animate={{height: isDropdownOpen? 'auto': '0'}}>
-        <NavLink>About Me</NavLink>
-        <NavLink>Portfolio</NavLink>
-        <NavLink>FAQ</NavLink>
-        <NavLink>Guest Spots</NavLink>
-        <NavLink>Consultation</NavLink>
+        <NavLink onClick={() => scrollToSection('about-me')}>About Me</NavLink>
+        <NavLink onClick={() => scrollToSection('portfolio')}>Portfolio</NavLink>
+        <NavLink onClick={() => scrollToSection('faq')}>FAQ</NavLink>
+        <NavLink onClick={() => scrollToSection('guest-spots')}>Guest Spots</NavLink>
+        <NavLink onClick={() => scrollToSection('consultation')}>Consultation</NavLink>
       </DropdownContainer>
     </NavContainer>
     )

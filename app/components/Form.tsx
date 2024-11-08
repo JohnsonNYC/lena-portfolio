@@ -25,13 +25,12 @@ const Form = () => {
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailRegex.test(value)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-
     setEmail(value);
+
+    // if (!emailRegex.test(value)) {
+    //   setError("Please enter a valid email address.");
+    //   return;
+    // }
   }
 
   const handlePhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +60,7 @@ const Form = () => {
   },[error])
 
   return (
-  <Container>
+  <Container id='consultation'>
     <Text size='xxl' as='div'>Lena Ink</Text>
     <Text as='div'>Include links, images, or a Pinterest board for your inspiration</Text>
     <Text as='div' color='green'>Must be 18 years of age or older</Text>

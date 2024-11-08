@@ -20,7 +20,7 @@ const FAQ_STORE = [
 
 const Faq = () => {
   return (
-    <Container>
+    <Container id='faq'>
       <Text color='blue' size='xl' weight={900}>FAQ</Text>
       {FAQ_STORE.map((data) => <QuestionTile key={data.key} question={data.question} answer={data.answer} />)}
     </Container>

@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import {motion} from 'framer-motion';
 import Text from './Text';
 
-const SEED = [1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10];
+const SEED = [1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10];
 
 const Gallery = () => {
   return (
     <>
-    <Text color='blue' weight={900} size='xl'>Gallery</Text>
+    <Text color='blue' weight={900} size='xl' id='portfolio'>Gallery</Text>
     <Container>
-      <MaruqeeContainer 
+      <MaruqeeContainer
         variants={marqueeVariants}
         initial="offscreen"
         animate="onscreen"

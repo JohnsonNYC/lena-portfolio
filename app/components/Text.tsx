@@ -13,6 +13,7 @@ interface TextProps {
   weight?: number;
   color?: string;
   className?: string;
+  id?: string
 }
 
 const Text: React.FC<TextProps> = ({ children,
@@ -22,6 +23,7 @@ const Text: React.FC<TextProps> = ({ children,
   weight = 100,
   color,
   className="",
+  id="",
   ...rest }) => {
   return (
     <StyledText
@@ -31,6 +33,7 @@ const Text: React.FC<TextProps> = ({ children,
       weight={weight}
       color={color}
       className={className}
+      id={id}
       {...rest}
       >
         {children}

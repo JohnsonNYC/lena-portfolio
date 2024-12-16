@@ -70,7 +70,7 @@ const SEED = [
 
 const Gallery = () => {
   const isMobile = useMediaPredicate("(max-width: 600px)");
-  console.log({ isMobile });
+
   return (
     <>
       <Text color="blue" weight={900} size="xl" id="portfolio">
@@ -132,8 +132,9 @@ const MaruqeeContainer = styled(motion.div)`
 `;
 
 const Card = styled.div`
-  min-width: 150px;
-  min-height: 200px;
+  width: 200px;
+  height: 300px;
+  aspect-ratio: 2 / 3;
   border: 1px solid black;
 `;
 
@@ -154,12 +155,12 @@ const marqueeVariants = {
     transition: {
       y: {
         repeat: Infinity,
-        duration: 180,
+        duration: 300,
         ease: "linear",
       },
       x: {
         repeat: Infinity,
-        duration: 180,
+        duration: 300,
         ease: "linear",
       },
     },

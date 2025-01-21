@@ -1,15 +1,18 @@
-import React from 'react'
-import styled from 'styled-components';
-import Text from './Text';
+import React from "react";
+import styled from "styled-components";
+import Text from "./Text";
 
 const HomeBanner = () => {
   return (
-    <Container className='HERE'>
-      <VideoPlaceholder/>
-      <Text className='banner-title'>New York City Based</Text>
+    <Container>
+      <Video autoPlay muted loop>
+        <source src="/videos/Intro.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </Video>
+      <Text className="banner-title">New York City Based</Text>
     </Container>
   );
-}
+};
 
 export default HomeBanner;
 
@@ -23,9 +26,9 @@ const Container = styled.div`
     bottom: 2rem;
     left: 2rem;
   }
-`
+`;
 
-const VideoPlaceholder = styled.div`
+const Video = styled.video`
   width: 100%;
   height: 100%;
-`
+`;

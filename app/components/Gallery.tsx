@@ -3,70 +3,31 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import Text from "./Text";
 import { useMediaPredicate } from "@/utils/hooks";
+import Image from "next/image";
 
-const SEED = [
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  ,
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
+const images = [
+  "/images/1.jpg",
+  "/images/2.jpg",
+  "/images/3.jpg",
+  "/images/4.jpg",
+  "/images/5.jpg",
+  "/images/6.jpg",
+  "/images/7.jpg",
+  "/images/8.jpg",
+  "/images/9.jpg",
+  "/images/10.jpg",
+  "/images/11.jpg",
+  "/images/12.jpg",
+  "/images/13.jpg",
+  "/images/14.jpg",
+  "/images/15.jpg",
+  "/images/16.jpg",
+  "/images/17.jpg",
+  "/images/18.jpg",
+  "/images/19.jpg",
 ];
+
+const loopImages = Array(4).fill(images).flat();
 
 const Gallery = () => {
   const isMobile = useMediaPredicate("(max-width: 600px)");
@@ -83,19 +44,33 @@ const Gallery = () => {
           animate="onscreen"
           custom={isMobile ? "down" : "left"}
         >
-          {SEED.map((num, i) => (
-            <Card key={`left-${i}`}>{num}</Card>
+          {loopImages.map((photoSrc, i) => (
+            <Card key={`left-${i}`}>
+              <Image
+                src={photoSrc}
+                alt={`Tattoo left ${i}`}
+                layout="fill"
+                objectFit="cover"
+              />
+            </Card>
           ))}
         </MaruqeeContainer>
-
         <MaruqeeContainer
           variants={marqueeVariants}
           initial="offscreen"
           animate="onscreen"
           custom={isMobile ? "up" : "right"}
         >
-          {SEED.map((num, i) => (
-            <Card key={`right-${i}`}>{num}</Card>
+          {images.map((photoSrc, i) => (
+            <Card key={`right-${i}`}>
+              {/* <img src={photoSrc} /> */}
+              <Image
+                src={photoSrc}
+                alt={`Tattoo right ${i}`}
+                layout="fill"
+                objectFit="cover"
+              />
+            </Card>
           ))}
         </MaruqeeContainer>
       </Container>
@@ -136,6 +111,7 @@ const Card = styled.div`
   height: 300px;
   aspect-ratio: 2 / 3;
   border: 1px solid black;
+  position: relative;
 `;
 
 const marqueeVariants = {
@@ -148,9 +124,9 @@ const marqueeVariants = {
         : [0, 0],
     x:
       direction === "left"
-        ? ["-550%", "100%"]
-        : direction === "right"
         ? ["0%", "-550%"]
+        : direction === "right"
+        ? ["-100%", "550%"]
         : [0, 0],
     transition: {
       y: {

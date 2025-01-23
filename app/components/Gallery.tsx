@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import Text from "./Text";
 import { useMediaPredicate } from "@/utils/hooks";
 import Image from "next/image";
+import Modal from "./Modal";
 
 const images = [
   "/images/1.jpg",
@@ -31,49 +32,77 @@ const loopImages = Array(4).fill(images).flat();
 
 const Gallery = () => {
   const isMobile = useMediaPredicate("(max-width: 600px)");
+  const [spotlight, setSpotlight] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (spotlight) setIsModalOpen(true);
+    else setIsModalOpen(false);
+  }, [spotlight]);
+
+  const showPicture = (photoSrc: string) => {
+    console.log("HERE");
+    setSpotlight(photoSrc);
+  };
 
   return (
-    <Wrapper>
-      <Text color="blue" weight={900} size="xl" id="portfolio">
-        Gallery
-      </Text>
-      <Container>
-        <MaruqeeContainer
-          variants={marqueeVariants}
-          initial="offscreen"
-          animate="onscreen"
-          custom={isMobile ? "down" : "left"}
-        >
-          {loopImages.map((photoSrc, i) => (
-            <Card key={`left-${i}`}>
-              <Image
-                src={photoSrc}
-                alt={`Tattoo left ${i}`}
-                fill
-                objectFit="cover"
-              />
-            </Card>
-          ))}
-        </MaruqeeContainer>
-        <MaruqeeContainer
-          variants={marqueeVariants}
-          initial="offscreen"
-          animate="onscreen"
-          custom={isMobile ? "up" : "right"}
-        >
-          {images.map((photoSrc, i) => (
-            <Card key={`right-${i}`}>
-              <Image
-                src={photoSrc}
-                alt={`Tattoo right ${i}`}
-                fill
-                objectFit="cover"
-              />
-            </Card>
-          ))}
-        </MaruqeeContainer>
-      </Container>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Text color="blue" weight={900} size="xl" id="portfolio">
+          Gallery
+        </Text>
+        <Container>
+          <MaruqeeContainer
+            variants={marqueeVariants}
+            initial="offscreen"
+            animate="onscreen"
+            custom={isMobile ? "down" : "left"}
+          >
+            {loopImages.map((photoSrc, i) => (
+              <Card key={`left-${i}`} onClick={() => showPicture(photoSrc)}>
+                <Image
+                  src={photoSrc}
+                  alt={`Tattoo left ${i}`}
+                  fill
+                  sizes="(max-width: 600px) 100vw, 50vw"
+                  style={{ objectFit: "cover" }}
+                />
+              </Card>
+            ))}
+          </MaruqeeContainer>
+          <MaruqeeContainer
+            variants={marqueeVariants}
+            initial="offscreen"
+            animate="onscreen"
+            custom={isMobile ? "up" : "right"}
+          >
+            {images.map((photoSrc, i) => (
+              <Card key={`right-${i}`} onClick={() => showPicture(photoSrc)}>
+                <Image
+                  src={photoSrc}
+                  alt={`Tattoo right ${i}`}
+                  fill
+                  sizes="(max-width: 600px) 100vw, 50vw"
+                  style={{ objectFit: "cover" }}
+                />
+              </Card>
+            ))}
+          </MaruqeeContainer>
+        </Container>
+      </Wrapper>
+
+      <Modal isOpen={isModalOpen} onClose={() => setSpotlight(null)}>
+        {spotlight ? (
+          <Image
+            src={spotlight}
+            alt={`Highlighted Photo`}
+            fill
+            sizes="(max-width: 600px) 100vw, 50vw"
+            style={{ objectFit: "cover", height: "100%" }}
+          />
+        ) : null}
+      </Modal>
+    </>
   );
 };
 
@@ -116,6 +145,7 @@ const Card = styled.div`
   height: 300px;
   aspect-ratio: 2 / 3;
   position: relative;
+  cursor: pointer;
 `;
 
 const marqueeVariants = {
@@ -128,9 +158,9 @@ const marqueeVariants = {
         : [0, 0],
     x:
       direction === "left"
-        ? ["0%", "-550%"]
+        ? ["0%", "-500%"]
         : direction === "right"
-        ? ["-100%", "550%"]
+        ? ["-370%", "0%"]
         : [0, 0],
     transition: {
       y: {

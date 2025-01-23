@@ -172,7 +172,6 @@ const WebDetails = styled.div`
     width: 100%;
 
     .about-me-title {
-      border: 1px solid red;
       display: none;
 
       &-mobile {

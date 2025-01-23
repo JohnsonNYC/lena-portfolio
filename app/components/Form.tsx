@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Text from "./Text";
+
 const lenaEmail = "jkow95@gmail.com";
+
 const Form = () => {
   const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState("");
@@ -185,7 +187,6 @@ const Container = styled.div`
   gap: 10px;
 
   @media screen and (max-width: 600px) {
-    border: 1px solid red;
     flex-direction: column;
   }
 `;

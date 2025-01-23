@@ -9,7 +9,9 @@ const HomeBanner = () => {
         <source src="/videos/Intro.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </Video>
-      <Text className="banner-title">New York City Based</Text>
+      <Text className="banner-title" size="lg" weight={900}>
+        New York City Based
+      </Text>
     </Container>
   );
 };
@@ -23,7 +25,7 @@ const Container = styled.div`
 
   .banner-title {
     position: absolute;
-    bottom: 2rem;
+    bottom: 4rem;
     left: 2rem;
   }
 `;
@@ -31,4 +33,5 @@ const Container = styled.div`
 const Video = styled.video`
   width: 100%;
   height: 100%;
+  object-fit: cover;
 `;

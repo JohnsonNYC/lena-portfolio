@@ -4,7 +4,7 @@ import Text from "./Text";
 import Image from "next/image";
 
 const placeholder =
-  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker";
+  " My tattoo style reflects my love for nature and my background in oil painting. I specialize in creating vibrant and elegant designs, focusing on detailed botanical elements and flowing compositions that blend bold colors with artisitic realism";
 
 const AboutMe = () => {
   return (
@@ -16,10 +16,12 @@ const AboutMe = () => {
           }}
         >
           <Image
-            src="/images/1.jpg"
+            src="/images/portrait.jpg"
             alt={"Portrait Photo"}
-            layout="fill"
-            objectFit="cover"
+            fill
+            sizes="(max-width: 500px) 100vw, 50vw"
+            style={{ objectFit: "cover" }}
+            // priority
           />
         </ImageContainer>
         <ImageContainer
@@ -57,7 +59,7 @@ const AboutMe = () => {
         >
           Passion and Precicion
         </Text>
-        <Text size="sm" as="div">
+        <Text size="lg" as="div">
           {placeholder}
         </Text>
       </WebDetails>

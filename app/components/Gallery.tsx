@@ -33,7 +33,7 @@ const Gallery = () => {
   const isMobile = useMediaPredicate("(max-width: 600px)");
 
   return (
-    <>
+    <Wrapper>
       <Text color="blue" weight={900} size="xl" id="portfolio">
         Gallery
       </Text>
@@ -49,7 +49,7 @@ const Gallery = () => {
               <Image
                 src={photoSrc}
                 alt={`Tattoo left ${i}`}
-                layout="fill"
+                fill
                 objectFit="cover"
               />
             </Card>
@@ -63,22 +63,27 @@ const Gallery = () => {
         >
           {images.map((photoSrc, i) => (
             <Card key={`right-${i}`}>
-              {/* <img src={photoSrc} /> */}
               <Image
                 src={photoSrc}
                 alt={`Tattoo right ${i}`}
-                layout="fill"
+                fill
                 objectFit="cover"
               />
             </Card>
           ))}
         </MaruqeeContainer>
       </Container>
-    </>
+    </Wrapper>
   );
 };
 
 export default Gallery;
+
+const Wrapper = styled.div`
+  & > span {
+    padding: 0rem 3rem;
+  }
+`;
 
 const Container = styled.div`
   display: flex;
@@ -110,7 +115,6 @@ const Card = styled.div`
   width: 200px;
   height: 300px;
   aspect-ratio: 2 / 3;
-  border: 1px solid black;
   position: relative;
 `;
 

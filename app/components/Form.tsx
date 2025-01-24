@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Text from "./Text";
 
-const lenaEmail = "jkow95@gmail.com";
+const lenaEmail = "lenavumc@gmail.com";
 
 const Form = () => {
   const [error, setError] = useState<string | null>(null);

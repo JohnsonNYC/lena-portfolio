@@ -1,9 +1,8 @@
-import React from 'react'
-import styled from 'styled-components';
-
+import React from "react";
+import styled from "styled-components";
 
 const sizeMap = { sm: "16px", md: "18px", lg: "20px", xl: "32px", xxl: "48px" };
-const fontMap = { arial: "Arial"};
+const fontMap = { arial: "Arial" };
 
 interface TextProps {
   children: React.ReactNode;
@@ -13,18 +12,20 @@ interface TextProps {
   weight?: number;
   color?: string;
   className?: string;
-  id?: string
+  id?: string;
 }
 
-const Text: React.FC<TextProps> = ({ children,
+const Text: React.FC<TextProps> = ({
+  children,
   as = "span",
   size = "md",
   font = "arial",
   weight = 100,
-  color,
-  className="",
-  id="",
-  ...rest }) => {
+  color = "black",
+  className = "",
+  id = "",
+  ...rest
+}) => {
   return (
     <StyledText
       as={as}
@@ -35,10 +36,11 @@ const Text: React.FC<TextProps> = ({ children,
       className={className}
       id={id}
       {...rest}
-      >
-        {children}
-    </StyledText> );
-}
+    >
+      {children}
+    </StyledText>
+  );
+};
 
 export default Text;
 

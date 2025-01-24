@@ -41,7 +41,6 @@ const Gallery = () => {
   }, [spotlight]);
 
   const showPicture = (photoSrc: string) => {
-    console.log("HERE");
     setSpotlight(photoSrc);
   };
 

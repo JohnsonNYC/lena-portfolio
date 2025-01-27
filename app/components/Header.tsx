@@ -60,9 +60,9 @@ const Header = () => {
           Portfolio
         </NavLink>
         <NavLink onClick={() => scrollToSection("faq")}>FAQ</NavLink>
-        <NavLink onClick={() => scrollToSection("guest-spots")}>
+        {/* <NavLink onClick={() => scrollToSection("guest-spots")}>
           Guest Spots
-        </NavLink>
+        </NavLink> */}
         <NavLink onClick={() => scrollToSection("consultation")}>
           Consultation
         </NavLink>

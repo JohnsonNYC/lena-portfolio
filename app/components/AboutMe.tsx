@@ -21,13 +21,22 @@ const AboutMe = () => {
             fill
             sizes="(max-width: 500px) 100vw, 50vw"
             style={{ objectFit: "cover" }}
-            // priority
+            priority
           />
         </ImageContainer>
         <ImageContainer
           className="lena-secondary"
           style={{ background: "grey" }}
-        />
+        >
+          <Image
+            src="/images/1.jpg"
+            alt={"Portrait Photo"}
+            fill
+            sizes="(max-width: 500px) 100vw, 50vw"
+            style={{ objectFit: "cover" }}
+            priority
+          />
+        </ImageContainer>
       </ImageWrapper>
 
       <WebDetails>

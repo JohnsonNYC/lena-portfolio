@@ -9,6 +9,7 @@ const Form = () => {
   const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [emailIsAcceptable, setEmailIsAcceptable] = useState(false);
   const [phone, setPhone] = useState("");
   const [description, setDescription] = useState("");
   const [placement, setPlacement] = useState("");
@@ -23,7 +24,7 @@ const Form = () => {
     const value = e.target.value;
     const nameRegex = /^[A-Za-z\s]+$/;
 
-    if (!nameRegex.test(value)) {
+    if (!nameRegex.test(value) && value.length > 0) {
       setError("Name can only contain letters and spaces.");
       return;
     }
@@ -34,6 +35,17 @@ const Form = () => {
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setEmail(value);
+  };
+
+  const isEmailAcceptable = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const isEmailFormatted = emailRegex.test(email);
+    setEmailIsAcceptable(isEmailFormatted);
+
+    if (!isEmailFormatted) {
+      setError("Please enter a valid email address.");
+    }
   };
 
   const resetState = () => {
@@ -129,7 +141,14 @@ const Form = () => {
   }, [error]);
 
   const isButtonDisabled = !Boolean(
-    name && email && phone && size && description && placement && file
+    name &&
+      email &&
+      emailIsAcceptable &&
+      phone &&
+      size &&
+      description &&
+      placement &&
+      file
   );
 
   return (
@@ -163,6 +182,7 @@ const Form = () => {
             name="email"
             value={email}
             onChange={handleEmail}
+            onBlur={isEmailAcceptable}
           />
           <Input
             placeholder="Phone number"
@@ -195,7 +215,7 @@ const Form = () => {
           value={pinterestLink}
           onChange={handlePinterestLink}
         />
-        {error ? <div>{error}</div> : null}
+        {error ? <Text color="error">{error}</Text> : null}
 
         <label htmlFor="fileInput">
           Upload Tattoo Area or References (5 max){" "}

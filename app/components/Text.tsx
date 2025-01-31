@@ -2,7 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const sizeMap = { sm: "16px", md: "18px", lg: "20px", xl: "32px", xxl: "48px" };
-const fontMap = { arial: "Arial" };
+const fontMap = {
+  arial: "Arial",
+  calligraphyOne: "Caligraphy One",
+  timesNewRoman: "Times New Roman",
+};
 
 interface TextProps {
   children: React.ReactNode;

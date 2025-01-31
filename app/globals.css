@@ -4,6 +4,7 @@
   --blue: #7993ab;
   --green: #235347;
   --success: #52b963;
+  --error: #ff0000;
   --white: white;
 }
 
@@ -11,6 +12,13 @@
   :root {
     --foreground: #ededed;
   }
+}
+
+@font-face {
+  font-family: "Caligraphy One";
+  src: url("../public/fonts/caligraphy-one.ttf");
+  font-weight: normal;
+  font-style: normal;
 }
 
 html,

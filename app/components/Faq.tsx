@@ -118,12 +118,10 @@ const QuestionTile = ({
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
 
   return (
-    <Tile>
-      <div
-        style={{ display: "flex", alignItems: "center" }}
-        onClick={() => setShowAnswer(!showAnswer)}
-      >
+    <Tile onClick={() => setShowAnswer(!showAnswer)}>
+      <div style={{ display: "flex", alignItems: "center" }}>
         <motion.div
+          style={{ height: "20xp", width: "20px" }}
           initial={{ rotate: 0 }}
           animate={{ rotate: showAnswer ? 180 : 0 }}
           transition={{ duration: 0.3 }}
@@ -161,12 +159,12 @@ const Answer = styled(motion.div)`
 const Tile = styled.div`
   border: 1px solid black;
   padding: 0.5rem;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
   cursor: pointer;
 
   svg {
     width: 20px;
-    margin-right: 0.5rem;
+    height: 20px;
   }
 `;
 

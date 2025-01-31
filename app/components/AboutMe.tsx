@@ -24,12 +24,13 @@ const AboutMe = () => {
             priority
           />
         </ImageContainer>
+
         <ImageContainer
           className="lena-secondary"
           style={{ background: "grey" }}
         >
           <Image
-            src="/images/1.jpg"
+            src="/images/20.jpg"
             alt={"Portrait Photo"}
             fill
             sizes="(max-width: 500px) 100vw, 50vw"
@@ -46,6 +47,7 @@ const AboutMe = () => {
           color="black"
           size="lg"
           weight={900}
+          font="calligraphyOne"
         >
           Passion
         </Text>
@@ -55,6 +57,7 @@ const AboutMe = () => {
           color="black"
           size="lg"
           weight={900}
+          font="calligraphyOne"
         >
           and Precision
         </Text>
@@ -65,10 +68,11 @@ const AboutMe = () => {
           color="black"
           size="lg"
           weight={900}
+          font="calligraphyOne"
         >
-          Passion and Precicion
+          Passion & Precicion
         </Text>
-        <Text size="lg" as="div">
+        <Text size="lg" as="div" font="timesNewRoman">
           {placeholder}
         </Text>
       </WebDetails>
@@ -86,14 +90,15 @@ const Container = styled.div`
 
   display: flex;
   flex-direction: row-reverse;
-  justify-content: space-between;
   align-items: center;
 
   .about-me-title {
     margin-bottom: 1rem;
   }
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 950px) {
+    min-height: 100vh;
+    height: auto;
     flex-direction: column;
   }
 `;
@@ -104,21 +109,26 @@ const ImageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 50%;
+  width: 100%;
 
   & > .lena-secondary {
     display: none;
   }
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 650px) {
     height: 50%;
     width: 100%;
+    display: flex;
+
+    & > .lena-secondary {
+      display: block;
+    }
   }
 `;
 
 const ImageContainer = styled.div`
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
   aspect-ratio: 2 / 3;
   position: relative;
 
@@ -126,33 +136,32 @@ const ImageContainer = styled.div`
     max-width: 200px;
 
     &:first-of-type {
-      position: absolute;
       left: 0rem;
       z-index: 1;
       height: 65%;
-    }
-
-    &:last-of-type {
-      display: block;
-      position: absolute;
-      right: 0rem;
-      height: 100%;
     }
   }
 `;
 
 const WebDetails = styled.div`
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 100%;
   background-image: url("/images/20.jpg");
   background-size: cover;
   background-position: center;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+
   & > h2 {
     font-size: 5vw;
+    left: 2rem;
+    position: relative;
+
     &:first-of-type {
       width: fit-content;
-      position: relative;
       left: 8rem;
     }
   }
@@ -160,28 +169,26 @@ const WebDetails = styled.div`
   & > div {
     width: 60%;
     position: relative;
-    left: 40%;
+    left: 30%;
   }
 
   .about-me-title-mobile {
     display: none;
   }
 
-  @media screen and (max-width: 1000px) {
-    & > h2 {
-      &:first-of-type {
-        left: 0;
-      }
-    }
+  @media screen and (max-width: 950px) {
+    background-image: none;
 
     & > div {
       width: 100%;
-      left: 0;
+      left: auto;
     }
   }
 
   @media screen and (max-width: 500px) {
     width: 100%;
+    height: 50%;
+    background-image: none;
 
     .about-me-title {
       display: none;

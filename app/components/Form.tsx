@@ -16,6 +16,7 @@ const Form = () => {
   const [size, setSize] = useState("");
   const [pinterestLink, setPinterestLink] = useState("");
   const [file, setFile] = useState<FileList | null>(null);
+  const [isColor, setisColor] = useState(true);
 
   const [isLoading, setIsLoading] = useState(false);
   const [showToast, setShowToast] = useState(false);
@@ -92,34 +93,59 @@ const Form = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    const formData = new FormData();
-    formData.append("to", "jkow95@gmail.com"); //update with lena email
-    formData.append("subject", `Tattoo Consultation for ${name}`);
-    formData.append(
-      "text",
-      `
-      Name: ${name}
-      Email: ${email}
-      Phone: ${phone}
-      Description: ${description};
-      Size: ${size};
-      Placement: ${placement};
-      Pinterst Link: ${pinterestLink}
-      `
-    );
-
-    if (file) {
-      Array.from(file).forEach((fileItem) => {
-        formData.append("attachments", fileItem);
-      });
-    }
+    // const formData = new FormData();
+    // formData.append("to", "jkow95@gmail.com"); //update with lena email
+    // formData.append("subject", `Tattoo Consultation for ${name}`);
+    // formData.append(
+    //   "text",
+    //   `
+    //   Name: ${name}
+    //   Email: ${email}
+    //   Phone: ${phone}
+    //   Description: ${description};
+    //   Size: ${size};
+    //   Tattoo Type: ${isColor ? "colored" : "black and grey"}
+    //   Placement: ${placement};
+    //   Pinterst Link: ${pinterestLink}
+    //   `
+    // );
 
     const API_BASE = process.env.NEXT_PUBLIC_EMAILER_API_URL;
     const deployedAPI = `${API_BASE}/send-email`;
 
+    const emailData = {
+      personalizations: [
+        {
+          to: [{ email: "jkow95@gmail.com" }], // Update with Lena's email
+          dynamic_template_data: {
+            name,
+            email,
+            phone,
+            description,
+            size,
+            tattoo_type: isColor ? "colored" : "black and grey",
+            placement,
+            pinterest_link: pinterestLink,
+          },
+        },
+      ],
+      from: { email: "johnsonkprod@gmail.com" }, // Update with your sender email
+      template_id: "d-3bbf74e02125429eb1602c1dfbef5230", // Replace with your actual SendGrid template ID
+    };
+
+    // if (file) {
+    //   Array.from(file).forEach((fileItem) => {
+    //     formData.append("attachments", fileItem);
+    //   });
+    // }
+
     const response = await fetch(deployedAPI, {
       method: "POST",
-      body: formData,
+      body: JSON.stringify(emailData),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SENDGRID_API_KEY}`,
+      },
     });
 
     if (response.status === 200) {
@@ -211,31 +237,51 @@ const Form = () => {
           onChange={handlePlacement}
         />
         <Input
-          placeholder="Image Reference Link"
+          placeholder="References Link (ie. Pinterest)"
           value={pinterestLink}
           onChange={handlePinterestLink}
         />
+
+        <ButtonContainer>
+          <Text weight={700}>Tattoo Type: </Text>
+          <ColorButton
+            type="button"
+            selected={isColor}
+            onClick={() => setisColor(true)}
+          >
+            Color
+          </ColorButton>
+          <ColorButton
+            type="button"
+            selected={!isColor}
+            onClick={() => setisColor(false)}
+          >
+            Black and White
+          </ColorButton>
+        </ButtonContainer>
+
         {error ? <Text color="error">{error}</Text> : null}
 
-        <label htmlFor="fileInput">
-          Upload Tattoo Area or References (5 max){" "}
-        </label>
-        <Input
-          name="attachments"
-          type="file"
-          accept="image/*"
-          id="fileInput"
-          multiple
-          required
-          onChange={(e) => {
-            const files = e.target.files;
-            if (files && files.length > 5) {
-              setError("You can only upload up to 5 files.");
-              return;
-            }
-            setFile(files);
-          }}
-        />
+        <ButtonContainer>
+          <Text weight={700}>Upload Tattoo Area or References (5 max): </Text>
+
+          <Input
+            name="attachments"
+            type="file"
+            accept="image/*"
+            id="fileInput"
+            multiple
+            required
+            onChange={(e) => {
+              const files = e.target.files;
+              if (files && files.length > 5) {
+                setError("You can only upload up to 5 files.");
+                return;
+              }
+              setFile(files);
+            }}
+          />
+        </ButtonContainer>
 
         <Button onClick={handleSubmit} disabled={isButtonDisabled || isLoading}>
           {isLoading ? (
@@ -268,6 +314,33 @@ const Form = () => {
 };
 
 export default Form;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+  gap: 10px;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    justify-content: center;
+  }
+`;
+
+const ColorButton = styled.button<{ selected: boolean }>`
+  padding: 1rem;
+  font-weight: 700;
+  margin-right: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+
+  border: ${(props) => (props.selected ? "green" : "black")};
+  background: ${(props) => (props.selected ? "green" : "black")};
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+`;
 
 const Toast = styled(motion.div)`
   border: 1px solid var(--success);

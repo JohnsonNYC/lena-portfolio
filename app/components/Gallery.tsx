@@ -108,6 +108,7 @@ const Gallery = () => {
 export default Gallery;
 
 const Wrapper = styled.div`
+  padding: 2rem 0;
   & > span {
     padding: 0rem 3rem;
   }

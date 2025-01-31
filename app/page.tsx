@@ -5,6 +5,7 @@ import AboutMe from "./components/AboutMe";
 import Gallery from "./components/Gallery";
 import Faq from "./components/Faq";
 import Form from "./components/Form";
+import GuestSpot from "./components/GuestSpot";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <main>
         <HomeBanner />
         <AboutMe />
+        <GuestSpot />
         <Gallery />
         <Faq />
         <Form />

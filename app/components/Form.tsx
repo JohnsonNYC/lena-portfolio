@@ -102,7 +102,7 @@ const Form = () => {
       });
     }
 
-    const API_BASE = process.env.EMAILER_API_URL;
+    const API_BASE = process.env.NEXT_PUBLIC_EMAILER_API_URL;
     const deployedAPI = `${API_BASE}/send-email`;
 
     const response = await fetch(deployedAPI, {

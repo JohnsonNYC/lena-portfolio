@@ -6,6 +6,7 @@ import Text from "./Text";
 
 const Header = () => {
   const prevScrollPosRef = useRef(0);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [showHeader, setShowHeader] = useState<boolean>(true);
@@ -24,21 +25,31 @@ const Header = () => {
     prevScrollPosRef.current = currentScrollPosition;
   };
 
+  const handleClickOutside = (event: MouseEvent): void => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsDropdownOpen(false);
+    }
+  };
+
   const scrollToSection = (sectionId: string): void => {
     const sectionElement = document.getElementById(sectionId);
     if (sectionElement) {
       sectionElement.scrollIntoView({
         behavior: "smooth",
-        block: "center",
       });
     }
   };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [prevScrollPosRef]);
 
@@ -53,6 +64,7 @@ const Header = () => {
         <Menu className="mobile-burger" onClick={handleBurgerClick} />
       </div>
       <DropdownContainer
+        ref={dropdownRef}
         initial={{ height: 0 }}
         animate={{ height: isDropdownOpen ? "auto" : "0" }}
       >

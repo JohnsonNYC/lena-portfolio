@@ -46,8 +46,8 @@ const Gallery = () => {
 
   return (
     <>
-      <Wrapper>
-        <Text color="blue" weight={900} size="xl" id="portfolio">
+      <Wrapper id="portfolio">
+        <Text color="blue" weight={900} size="xl">
           Gallery
         </Text>
         <Container>

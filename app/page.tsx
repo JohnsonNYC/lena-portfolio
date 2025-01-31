@@ -14,8 +14,8 @@ export default function Home() {
       <main>
         <HomeBanner />
         <AboutMe />
-        <GuestSpot />
         <Gallery />
+        <GuestSpot />
         <Faq />
         <Form />
       </main>

@@ -93,55 +93,27 @@ const Form = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // const formData = new FormData();
-    // formData.append("to", "jkow95@gmail.com"); //update with lena email
-    // formData.append("subject", `Tattoo Consultation for ${name}`);
-    // formData.append(
-    //   "text",
-    //   `
-    //   Name: ${name}
-    //   Email: ${email}
-    //   Phone: ${phone}
-    //   Description: ${description};
-    //   Size: ${size};
-    //   Tattoo Type: ${isColor ? "colored" : "black and grey"}
-    //   Placement: ${placement};
-    //   Pinterst Link: ${pinterestLink}
-    //   `
-    // );
-
     const API_BASE = process.env.NEXT_PUBLIC_EMAILER_API_URL;
     const deployedAPI = `${API_BASE}/send-email`;
 
-    const emailData = {
-      personalizations: [
-        {
-          to: [{ email: "jkow95@gmail.com" }], // Update with Lena's email
-          dynamic_template_data: {
-            name,
-            email,
-            phone,
-            description,
-            size,
-            tattoo_type: isColor ? "colored" : "black and grey",
-            placement,
-            pinterest_link: pinterestLink,
-          },
-        },
-      ],
-      from: { email: "johnsonkprod@gmail.com" }, // Update with your sender email
-      template_id: "d-3bbf74e02125429eb1602c1dfbef5230", // Replace with your actual SendGrid template ID
+    const formData = {
+      to: "jkow95@gmail.com",
+      dynamicData: {
+        name,
+        email,
+        phone,
+        description,
+        size,
+        tattoo_type: isColor ? "colored" : " black and grey",
+        placement,
+        pinterest_link: pinterestLink,
+      },
+      attachments: file ? Array.from(file) : [],
     };
-
-    // if (file) {
-    //   Array.from(file).forEach((fileItem) => {
-    //     formData.append("attachments", fileItem);
-    //   });
-    // }
 
     const response = await fetch(deployedAPI, {
       method: "POST",
-      body: JSON.stringify(emailData),
+      body: JSON.stringify(formData),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`,

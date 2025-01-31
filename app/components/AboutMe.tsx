@@ -43,7 +43,7 @@ const AboutMe = () => {
         <Text
           className="about-me-title"
           as="h2"
-          color="blue"
+          color="black"
           size="lg"
           weight={900}
         >
@@ -52,7 +52,7 @@ const AboutMe = () => {
         <Text
           className="about-me-title"
           as="h2"
-          color="blue"
+          color="black"
           size="lg"
           weight={900}
         >
@@ -62,7 +62,7 @@ const AboutMe = () => {
         <Text
           className="about-me-title-mobile"
           as="h2"
-          color="blue"
+          color="black"
           size="lg"
           weight={900}
         >
@@ -144,6 +144,9 @@ const ImageContainer = styled.div`
 const WebDetails = styled.div`
   width: 50%;
   height: 50%;
+  background-image: url("/images/20.jpg");
+  background-size: cover;
+  background-position: center;
 
   & > h2 {
     font-size: 5vw;

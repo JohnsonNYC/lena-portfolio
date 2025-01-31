@@ -96,28 +96,35 @@ const Form = () => {
     const API_BASE = process.env.NEXT_PUBLIC_EMAILER_API_URL;
     const deployedAPI = `${API_BASE}/send-email`;
 
-    const formData = {
-      to: "jkow95@gmail.com",
-      dynamicData: {
+    const formData = new FormData();
+    formData.append("to", "jkow95@gmail.com");
+    formData.append(
+      "dynamicData",
+      JSON.stringify({
         name,
         email,
         phone,
         description,
         size,
-        tattoo_type: isColor ? "colored" : " black and grey",
         placement,
+        tattoo_type: isColor ? "colored" : "black and grey",
         pinterest_link: pinterestLink,
-      },
-      attachments: file ? Array.from(file) : [],
-    };
+      })
+    );
+
+    if (file) {
+      Array.from(file).forEach((fileItem) => {
+        formData.append("attachments", fileItem);
+      });
+    }
 
     const response = await fetch(deployedAPI, {
       method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`,
-      },
+      body: formData,
+      // headers: {
+      //   "Content-Type": "application/json",
+      //   Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`,
+      // },
     });
 
     if (response.status === 200) {

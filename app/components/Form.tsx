@@ -108,7 +108,7 @@ const Form = () => {
         size,
         placement,
         tattoo_type: isColor ? "colored" : "black and grey",
-        pinterest_link: pinterestLink,
+        pinterest_link: pinterestLink || "none provided",
       })
     );
 
@@ -121,10 +121,6 @@ const Form = () => {
     const response = await fetch(deployedAPI, {
       method: "POST",
       body: formData,
-      // headers: {
-      //   "Content-Type": "application/json",
-      //   Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`,
-      // },
     });
 
     if (response.status === 200) {

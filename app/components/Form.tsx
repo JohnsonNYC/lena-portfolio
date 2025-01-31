@@ -144,7 +144,7 @@ const Form = () => {
       body: JSON.stringify(emailData),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SENDGRID_API_KEY}`,
+        Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`,
       },
     });
 

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Text from "./Text";
 import { motion } from "framer-motion";
 
-// const lenaEmail = "lenavumc@gmail.com";
+const lenaEmail = "lenavumc@gmail.com";
 
 const Form = () => {
   const [error, setError] = useState<string | null>(null);
@@ -97,7 +97,7 @@ const Form = () => {
     const deployedAPI = `${API_BASE}/send-email`;
 
     const formData = new FormData();
-    formData.append("to", "jkow95@gmail.com");
+    formData.append("to", lenaEmail);
     formData.append(
       "dynamicData",
       JSON.stringify({

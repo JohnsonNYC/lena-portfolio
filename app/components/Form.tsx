@@ -331,7 +331,7 @@ const Toast = styled(motion.div)`
 `;
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   padding: 4rem;
 
   display: flex;
@@ -342,6 +342,7 @@ const Container = styled.div`
 
   @media screen and (max-width: 600px) {
     flex-direction: column;
+    padding: 2rem;
   }
 `;
 const FormWrapper = styled.form`

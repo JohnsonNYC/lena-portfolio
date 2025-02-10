@@ -5,7 +5,7 @@ import Text from "./Text";
 const HomeBanner = () => {
   return (
     <Container>
-      <Video autoPlay muted loop>
+      <Video autoPlay muted loop playsInline>
         <source src="/videos/Intro.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </Video>

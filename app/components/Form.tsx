@@ -308,6 +308,7 @@ const ColorButton = styled.button<{ selected: boolean }>`
   margin-right: 1rem;
   border-radius: 10px;
   cursor: pointer;
+  color: white;
 
   border: ${(props) => (props.selected ? "green" : "black")};
   background: ${(props) => (props.selected ? "green" : "black")};

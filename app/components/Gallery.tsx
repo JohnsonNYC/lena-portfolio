@@ -141,7 +141,7 @@ const MaruqeeContainer = styled(motion.div)`
 `;
 
 const Card = styled.div`
-  width: 200px;
+  min-width: 200px;
   height: 300px;
   aspect-ratio: 2 / 3;
   position: relative;

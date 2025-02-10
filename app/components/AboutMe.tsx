@@ -30,7 +30,7 @@ const AboutMe = () => {
           style={{ background: "grey" }}
         >
           <Image
-            src="/images/20.jpg"
+            src="/images/20.JPG"
             alt={"Portrait Photo"}
             fill
             sizes="(max-width: 500px) 100vw, 50vw"
@@ -146,7 +146,7 @@ const ImageContainer = styled.div`
 const WebDetails = styled.div`
   width: 100%;
   height: 100%;
-  background-image: url("/images/20.jpg");
+  background-image: url("/images/20.JPG");
   background-size: cover;
   background-position: center;
 

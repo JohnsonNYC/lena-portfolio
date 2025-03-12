@@ -4,6 +4,7 @@ import Text from "./Text";
 import { motion } from "framer-motion";
 
 const lenaEmail = "lenavumc@gmail.com";
+// TESTING const lenaEmail = "jkow95@gmail.com";
 
 const Form = () => {
   const [error, setError] = useState<string | null>(null);

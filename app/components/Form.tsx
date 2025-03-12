@@ -134,6 +134,15 @@ const Form = () => {
     setIsLoading(false);
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 5) {
+      setError("You can only upload up to 5 files.");
+      return;
+    }
+    setFile(files);
+  };
+
   useEffect(() => {
     if (!error) return;
     setTimeout(() => {
@@ -237,9 +246,12 @@ const Form = () => {
 
         {error ? <Text color="error">{error}</Text> : null}
 
-        <ButtonContainer>
-          <Text weight={700}>Upload Tattoo Area or References (5 max): </Text>
+        <Text weight={700}>Upload Tattoo Area or References (5 max): </Text>
 
+        <span style={{ marginBottom: "1rem" }}>
+          <UploadLabel htmlFor="fileInput" className="upload-button">
+            Upload Photos
+          </UploadLabel>
           <Input
             name="attachments"
             type="file"
@@ -247,16 +259,21 @@ const Form = () => {
             id="fileInput"
             multiple
             required
-            onChange={(e) => {
-              const files = e.target.files;
-              if (files && files.length > 5) {
-                setError("You can only upload up to 5 files.");
-                return;
-              }
-              setFile(files);
-            }}
+            onChange={(e) => handleFileChange(e)}
+            style={{ display: "none" }}
           />
-        </ButtonContainer>
+        </span>
+
+        {file && (
+          <div>
+            <Text weight={700}>Selected Files:</Text>
+            <ol>
+              {Array.from(file).map((f, index) => (
+                <li key={index}>{f.name}</li>
+              ))}
+            </ol>
+          </div>
+        )}
 
         <Button onClick={handleSubmit} disabled={isButtonDisabled || isLoading}>
           {isLoading ? (
@@ -296,7 +313,7 @@ const ButtonContainer = styled.div`
   margin: 1rem 0;
   gap: 10px;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 700px) {
     flex-direction: column;
     justify-content: center;
   }
@@ -310,10 +327,10 @@ const ColorButton = styled.button<{ selected: boolean }>`
   cursor: pointer;
   color: white;
 
-  border: ${(props) => (props.selected ? "green" : "black")};
-  background: ${(props) => (props.selected ? "green" : "black")};
+  border: ${(props) => (props.selected ? "#49ca3e" : "black")};
+  background: ${(props) => (props.selected ? "#49ca3e" : "black")};
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 700px) {
     width: 100%;
   }
 `;
@@ -341,7 +358,7 @@ const Container = styled.div`
   gap: 10px;
   position: relative;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 700px) {
     flex-direction: column;
     padding: 2rem;
   }
@@ -351,11 +368,7 @@ const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
 
-  label {
-    margin-top: 1rem;
-  }
-
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 700px) {
     width: 100%;
   }
 `;
@@ -374,7 +387,7 @@ const Input = styled.input`
   &::placeholder {
     font-size: 1.5vw;
 
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 700px) {
       font-size: 5vw;
     }
   }
@@ -395,7 +408,7 @@ const LeftContainer = styled.div`
     }
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 700px) {
     width: 100%;
 
     & > div {
@@ -415,10 +428,29 @@ const Button = styled.button`
   font-size: 16px;
   font-weight: 900;
   border-radius: 10px;
-  background: black;
+  background: #49ca3e;
   cursor: pointer;
+  margin-top: 1rem;
 
   &:disabled {
     background: grey;
+  }
+`;
+
+const UploadLabel = styled.label`
+  border: 2px solid #49ca3e;
+  display: inline-block;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 400;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 100%;
   }
 `;

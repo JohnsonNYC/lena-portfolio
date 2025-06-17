@@ -3,9 +3,9 @@ import styled from "styled-components";
 import Text from "./Text";
 import { motion } from "framer-motion";
 
-// const lenaEmail = "lenavumc@gmail.com";
+const lenaEmail = "lenavumc@gmail.com";
 //TESTING EMAIL BELOW
-const lenaEmail = "jkow95@gmail.com";
+// const lenaEmail = "jkow95@gmail.com";
 
 const Form = () => {
   const [error, setError] = useState<string | null>(null);

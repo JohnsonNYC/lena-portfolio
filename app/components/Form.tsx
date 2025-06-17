@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 // const lenaEmail = "lenavumc@gmail.com";
 //TESTING EMAIL BELOW (Verified Reply-To Email Address on SendGrid)
-// const lenaEmail = "jkow95@gmail.com";
+const lenaEmail = "jkow95@gmail.com";
 
 const Form = () => {
   const [error, setError] = useState<string | null>(null);
